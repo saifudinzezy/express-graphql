@@ -3,20 +3,20 @@ export default `
     id: ID!
     name: String!
     age: Int!
-    jadwals:[Jadwal]
+    jadwals:[Jadwal!]!
   }
 
   type Jadwal {
     id: ID!
     day: String!
-    matkulId: ID
-    mahasiswaId: ID
+    matkulId: ID!
+    mahasiswaId: ID!
   }
 
   type Matkul {
     id: ID!
     name: String!
-    jadwals: [Jadwal]
+    jadwals: [Jadwal!]!
   }
 
   type Query {

@@ -1,4 +1,10 @@
 export default {
+    Mahasiswa: {
+        jadwals: (parent, args, context, info) => parent.getJadwals()
+    },
+    Matkul: {
+        jadwals: (parent, args, context, info) => parent.getJadwals()
+    },
     Query: {
         //mahasiswa
         mahasiswas: (
