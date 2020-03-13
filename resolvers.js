@@ -1,40 +1,174 @@
 export default {
-  Author: {
-    posts: (parent, args, context, info) => parent.getPosts()
-  },
-  Post: {
-    author: (parent, args, context, info) => parent.getAuthor()
-  },
-  Query: {
-    posts: (parent, args, { db }, info) => db.post.findAll(),
-    authors: (parent, args, { db }, info) => db.author.findAll(),
-    post: (parent, { id }, { db }, info) => db.post.findByPk(id),
-    author: (parent, { id }, { db }, info) => db.author.findByPk(id)
-  },
-  Mutation: {
-    createPost: (parent, { title, content, authorId }, { db }, info) =>
-      db.post.create({
-        title: title,
-        content: content,
-        authorId: authorId
-      }),
-    updatePost: (parent, { title, content, id }, { db }, info) =>
-      db.post.update(
-        {
-          title: title,
-          content: content
-        },
-        {
-          where: {
-            id: id
-          }
-        }
-      ),
-    deletePost: (parent, { id }, { db }, info) =>
-      db.post.destroy({
-        where: {
-          id: id
-        }
-      })
-  }
+    Query: {
+        //mahasiswa
+        mahasiswas: (
+            parent, args, {
+                db
+            }, info
+        ) => db.mahasiswa.findAll(),
+        mahasiswa: (parent, {
+            id
+        }, {
+            db
+        }, info) => db.mahasiswa.findByPk(id),
+        //end mahasiswa
+        //matkul
+        matkuls: (
+            parent, args, {
+                db
+            }, info
+        ) => db.matkul.findAll(),
+        matkul: (parent, {
+            id
+        }, {
+            db
+        }, info) => db.matkul.findByPk(id),
+        //end matkul
+        //jadwal
+        jadwals: (
+            parent, args, {
+                db
+            }, info
+        ) => db.jadwal.findAll(),
+        jadwal: (parent, {
+            id
+        }, {
+            db
+        }, info) => db.jadwal.findByPk(id),
+        //end jadwal
+    },
+    Mutation: {
+        //mahasiswa
+        createMahasiswa: (parent, {
+                name,
+                age
+            }, {
+                db
+            }, info) =>
+            db.mahasiswa.create({
+                name: name,
+                age: age
+            }),
+        updateMahasiswa: (parent, {
+                id,
+                name,
+                age
+            }, {
+                db
+            }, info) =>
+            db.mahasiswa.update({
+                name: name,
+                age: age
+            }, {
+                where: {
+                    id: id
+                }
+            }).then(() => {
+                return db.mahasiswa.findByPk(id)
+            }),
+        deleteMahasiswa: (parent, {
+                id
+            }, {
+                db
+            }, info) =>
+            db.mahasiswa.findByPk(id).then((result) => {
+                return db.mahasiswa.destroy({
+                        where: {
+                            id: id
+                        }
+                    })
+                    .then((u) => {
+                        return result
+                    });
+            }),
+        //end mahasiswa
+        //Matkul
+        createMatkul: (parent, {
+                name,
+                age
+            }, {
+                db
+            }, info) =>
+            db.matkul.create({
+                name: name,
+                age: age
+            }),
+        updateMatkul: (parent, {
+                id,
+                name,
+                age
+            }, {
+                db
+            }, info) =>
+            db.matkul.update({
+                name: name,
+                age: age
+            }, {
+                where: {
+                    id: id
+                }
+            }).then(() => {
+                return db.matkul.findByPk(id)
+            }),
+        deleteMatkul: (parent, {
+                id
+            }, {
+                db
+            }, info) =>
+            db.matkul.findByPk(id).then((result) => {
+                return db.matkul.destroy({
+                        where: {
+                            id: id
+                        }
+                    })
+                    .then((u) => {
+                        return result
+                    });
+            }),
+        //end Matkul
+        //Jadwal
+        createJadwal: (parent, {
+                day,
+                matkulId
+            }, {
+                db
+            }, info) =>
+            db.jadwal.create({
+                day: day,
+                matkulId: matkulId
+            }),
+        updateJadwal: (parent, {
+                id,
+                day,
+                matkulId
+            }, {
+                db
+            }, info) =>
+            db.jadwal.update({
+                day: day,
+                matkulId: matkulId
+            }, {
+                where: {
+                    id: id
+                }
+            }).then(() => {
+                return db.jadwal.findByPk(id)
+            }),
+        deleteJadwal: (parent, {
+                id
+            }, {
+                db
+            }, info) =>
+            db.jadwal.findByPk(id).then((result) => {
+                return db.jadwal.destroy({
+                        where: {
+                            id: id
+                        }
+                    })
+                    .then((u) => {
+                        return result
+                    });
+            }),
+        //end Jadwal
+    }
 };

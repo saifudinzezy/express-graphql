@@ -1,23 +1,23 @@
 {
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "api_node_demo",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
+    "development": {
+        "username": "root",
+        "password": "root",
+        "database": "graphql_lab",
+        "host": "192.168.144.1",
+        "dialect": "mysql"
+    },
+    "test": {
+        "username": "root",
+        "password": "root",
+        "database": "database_test",
+        "host": "192.168.144.1",
+        "dialect": "mysql"
+    },
+    "production": {
+        "username": "root",
+        "password": "root",
+        "database": "database_production",
+        "host": "192.168.144.1",
+        "dialect": "mysql"
+    }
 }
