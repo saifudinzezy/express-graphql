@@ -2,21 +2,20 @@ export default `
   type Mahasiswa {
     id: ID!
     name: String!
-    age: Int!
-    jadwals:[Jadwal!]!
+    pembimbings: [Pembimbing!] !
+    matkuls: [Matkul!] !
   }
 
-  type Jadwal {
+  type Pembimbing {
     id: ID!
-    day: String!
-    matkulId: ID!
-    mahasiswaId: ID!
+    name: String!
+    mahasiswa: Mahasiswa
   }
 
   type Matkul {
     id: ID!
     name: String!
-    jadwals: [Jadwal!]!
+    mahasiswa: Mahasiswa
   }
 
   type Query {
@@ -26,22 +25,22 @@ export default `
     matkuls: [Matkul]
     matkul(id: ID!): Matkul
 
-    jadwals: [Jadwal]
-    jadwal(id: ID!): Jadwal
+    pembimbings: [Pembimbing]
+    pembimbing(id: ID!): Pembimbing
 
   }
 
   type Mutation {
-    createMahasiswa(name: String!, age: Int!): Mahasiswa!
-    updateMahasiswa(id: ID!, name: String, age: Int): Mahasiswa!
+    createMahasiswa(name: String!): Mahasiswa!
+    updateMahasiswa(id: ID!, name: String): Mahasiswa!
     deleteMahasiswa(id: ID!): Mahasiswa!
 
-    createMatkul(name: String!): Matkul!
-    updateMatkul(id: ID!, name: String): Matkul!
+    createMatkul(name: String!, mahasiswaId: ID!): Matkul!
+    updateMatkul(id: ID!, name: String, mahasiswaId: ID!): Matkul!
     deleteMatkul(id: ID!): Matkul!
 
-    createJadwal(day: String, matkulId: ID!): Jadwal!
-    updateJadwal(id: ID!, day: String): Jadwal!
-    deleteJadwal(id: ID!): Jadwal!
+    createPembimbing(day: String, mahasiswaID: ID!): Pembimbing!
+    updatePembimbing(id: ID!, name: String): Pembimbing!
+    deletePembimbing(id: ID!): Pembimbing!
   }
 `;

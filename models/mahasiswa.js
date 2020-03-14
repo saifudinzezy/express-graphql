@@ -5,14 +5,17 @@ export default (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        name: DataTypes.STRING,
-        age: DataTypes.INTEGER,
+        name: DataTypes.STRING
     }, {
         freezeTableName: true,
     });
 
     Mahasiswa.associate = (models) => {
-        Mahasiswa.hasMany(models.jadwal);
+        Mahasiswa.hasMany(models.pembimbing);
+    };
+
+    Mahasiswa.associate = (models) => {
+        Mahasiswa.hasMany(models.matkul);
     };
 
     return Mahasiswa;

@@ -1,9 +1,13 @@
 export default {
     Mahasiswa: {
-        jadwals: (parent, args, context, info) => parent.getJadwals()
+        // pembimbings: (parent, args, context, info) => parent.getPembimbing(),
+        matkuls: (parent, args, context, info) => parent.getMatkuls()
     },
     Matkul: {
-        jadwals: (parent, args, context, info) => parent.getJadwals()
+        mahasiswa: (parent, args, context, info) => parent.getMahasiswa()
+    },
+    Pembimbing: {
+        mahasiswa: (parent, args, context, info) => parent.getMahasiswa()
     },
     Query: {
         //mahasiswa
@@ -30,41 +34,37 @@ export default {
             db
         }, info) => db.matkul.findByPk(id),
         //end matkul
-        //jadwal
-        jadwals: (
+        //pembimbing
+        pembimbings: (
             parent, args, {
                 db
             }, info
-        ) => db.jadwal.findAll(),
-        jadwal: (parent, {
+        ) => db.pembimbing.findAll(),
+        pembimbing: (parent, {
             id
         }, {
             db
-        }, info) => db.jadwal.findByPk(id),
-        //end jadwal
+        }, info) => db.pembimbing.findByPk(id),
+        //end pembimbing
     },
     Mutation: {
         //mahasiswa
         createMahasiswa: (parent, {
-                name,
-                age
+                name
             }, {
                 db
             }, info) =>
             db.mahasiswa.create({
-                name: name,
-                age: age
+                name: name
             }),
         updateMahasiswa: (parent, {
                 id,
-                name,
-                age
+                name
             }, {
                 db
             }, info) =>
             db.mahasiswa.update({
-                name: name,
-                age: age
+                name: name
             }, {
                 where: {
                     id: id
@@ -91,24 +91,24 @@ export default {
         //Matkul
         createMatkul: (parent, {
                 name,
-                age
+                mahasiswaId
             }, {
                 db
             }, info) =>
             db.matkul.create({
                 name: name,
-                age: age
+                mahasiswaId: mahasiswaId
             }),
         updateMatkul: (parent, {
                 id,
                 name,
-                age
+                mahasiswaId
             }, {
                 db
             }, info) =>
             db.matkul.update({
                 name: name,
-                age: age
+                mahasiswaId: mahasiswaId
             }, {
                 where: {
                     id: id
@@ -132,25 +132,27 @@ export default {
                     });
             }),
         //end Matkul
-        //Jadwal
-        createJadwal: (parent, {
+        //Pembimbing
+        createPembimbing: (parent, {
                 day,
-                matkulId
+                matkulId,
+                mahasiswaId
             }, {
                 db
             }, info) =>
-            db.jadwal.create({
+            db.pembimbing.create({
                 day: day,
-                matkulId: matkulId
+                matkulId: matkulId,
+                mahasiswaId: mahasiswaId
             }),
-        updateJadwal: (parent, {
+        updatePembimbing: (parent, {
                 id,
                 day,
                 matkulId
             }, {
                 db
             }, info) =>
-            db.jadwal.update({
+            db.pembimbing.update({
                 day: day,
                 matkulId: matkulId
             }, {
@@ -158,15 +160,15 @@ export default {
                     id: id
                 }
             }).then(() => {
-                return db.jadwal.findByPk(id)
+                return db.pembimbing.findByPk(id)
             }),
-        deleteJadwal: (parent, {
+        deletePembimbing: (parent, {
                 id
             }, {
                 db
             }, info) =>
-            db.jadwal.findByPk(id).then((result) => {
-                return db.jadwal.destroy({
+            db.pembimbing.findByPk(id).then((result) => {
+                return db.pembimbing.destroy({
                         where: {
                             id: id
                         }
@@ -175,6 +177,6 @@ export default {
                         return result
                     });
             }),
-        //end Jadwal
+        //end Pembimbing
     }
 };

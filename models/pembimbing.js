@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-    const Matkul = sequelize.define('matkul', {
+    const Pembimbing = sequelize.define('pembimbing', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -10,9 +10,9 @@ export default (sequelize, DataTypes) => {
         freezeTableName: true,
     });
 
-    Matkul.associate = (models) => {
-        Matkul.belongsTo(models.mahasiswa);
+    Pembimbing.associate = (models) => {
+        Pembimbing.belongsTo(models.mahasiswa);
     };
 
-    return Matkul;
+    return Pembimbing;
 };

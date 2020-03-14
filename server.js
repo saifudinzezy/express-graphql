@@ -36,22 +36,21 @@ db.sequelize.sync().then(() => {
     // populate mahasiswa table with fake data
     db.mahasiswa.bulkCreate(
         times(10, () => ({
-            name: faker.name.firstName() + ' ' + faker.name.lastName(),
-            age: Math.floor(Math.random() * 25) + 15
+            name: faker.name.firstName() + ' ' + faker.name.lastName()
         }))
     );
     // populate jadwal table with fake data
-    db.jadwal.bulkCreate(
+    db.pembimbing.bulkCreate(
         times(10, () => ({
-            day: "Selasa",
-            mahasiswaId: random(2, 10),
-            matkulId: random(1, 10),
+            name: faker.name.lastName(),
+            mahasiswaId: random(1, 10),
         }))
     );
     // populate matkul table with fake data
     db.matkul.bulkCreate(
         times(10, () => ({
             name: "Matematika",
+            mahasiswaId: random(1, 10),
         }))
     );
 
